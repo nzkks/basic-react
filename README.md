@@ -1,5 +1,7 @@
 # Basic React concepts
 
+- Using mock api requests (local JSON data, etc)
+
 ### Technologies Used:
 
 - React
