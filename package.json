@@ -1,0 +1,25 @@
+{
+  "name": "basic-react",
+  "version": "1.0.0",
+  "description": "Basic react concepts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/nzkks/basic-react.git"
+  },
+  "keywords": [
+    "React",
+    "React",
+    "Router",
+    "Browserify"
+  ],
+  "author": "Shanthosh Krishnakumar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nzkks/basic-react/issues"
+  },
+  "homepage": "https://github.com/nzkks/basic-react#readme"
+}
