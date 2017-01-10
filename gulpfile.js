@@ -4,12 +4,19 @@ var gulp = require('gulp');
 var connect = require('gulp-connect');
 var open = require('gulp-open');
 
+var browserify = require('browserify');
+var reactify = require('reactify');
+var source = require('vinyl-source-stream');
+var eslint = require('gulp-eslint');
+
 var config = {
   port: 9005,
   devBaseUri: 'http://localhost',
   paths: {
     html: './src/*.html',
-    dist: './dist'
+    js: './src/**/*.js',
+    dist: './dist',
+    mainJs: './src/main.js'
   }
 };
 
@@ -37,8 +44,25 @@ gulp.task('html', function(){
     .pipe(connect.reload());
 });
 
-gulp.task('watch', function(){
-  gulp.watch(config.paths.html, ['html']);
+gulp.task('js', function(){
+  browserify(config.paths.mainJs)
+    .transform(reactify)
+    .bundle()
+    .on('error', console.error.bind(console))
+    .pipe(source('bundle.js'))
+    .pipe(gulp.dest(config.paths.dist + '/scripts'))
+    .pipe(connect.reload());
 });
 
-gulp.task('default', ['html', 'open', 'watch']);
+gulp.task('lint', function(){
+  return gulp.src(config.paths.js)
+    .pipe(eslint({config: 'eslint.config.json'}))
+    .pipe(eslint.format());
+})
+
+gulp.task('watch', function(){
+  gulp.watch(config.paths.html, ['html']);
+  gulp.watch(config.paths.js, ['js', 'lint']);
+});
+
+gulp.task('default', ['html', 'js', 'lint', 'open', 'watch']);
