@@ -29737,7 +29737,10 @@ var React = require('react');
 var Home = React.createClass({displayName: "Home",
   render: function(){
     return (
-      React.createElement("h1", null, "Home page")
+      React.createElement("div", {className: "jumbotron"}, 
+        React.createElement("h1", null, "Home page"), 
+        React.createElement("p", null, "Testing the basic concepts of React Js.")
+      )
     );
   }
 });
@@ -29749,6 +29752,9 @@ $ = jQuery = require('jquery');
 var React = require('react');
 var Home = require('./components/homePage');
 var About = require('./components/about/aboutPage');
+
+// Globally the 'use strict' directive can't be added because of the jquery variable declaration.
+// But the same effect can be achived by adding a Immediately Invoked Function Expression (IIFE) to wrap the underlying scripts and then within this wrapper we can specify the directive.
 
 (function(win){
   "use strict";
